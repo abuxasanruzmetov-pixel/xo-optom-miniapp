@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 TOKEN = os.environ.get("TOKEN")
-ADMIN_ID = int(os.environ.get("ADMIN_ID", "998972030307"))
+ADMIN_ID = int(os.environ.get("ADMIN_ID", "273040528"))
 WEBHOOK_URL = os.environ.get("WEBHOOK_URL", "")
 PORT = int(os.environ.get("PORT", 8080))
 
