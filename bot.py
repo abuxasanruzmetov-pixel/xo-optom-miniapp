@@ -202,7 +202,7 @@ def place_order(call):
 
 @bot.message_handler(func=lambda m: m.text and "Aloqa" in m.text)
 def contact(m):
-    text = "\U0001f4de Bog'lanish uchun:\n\n@xasanboy_optom\nTel: +998901234567"
+    text = "\U0001f4de Bog'lanish uchun:\n\n@xasanboy_optom\nTel: +998972030307"
     bot.send_message(m.chat.id, text)
 
 
