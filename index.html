@@ -1,3 +1,234 @@
-<!DOCTYPE html><html lang="uz"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>XASANBOY OPTOM</title><script src="https://telegram.org/js/telegram-web-app.js"></script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}body{background:#f5f5f5;max-width:430px;margin:0 auto}.header{background:linear-gradient(135deg,#e8000a,#a80008);padding:14px 16px;color:#fff;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100}.logo{width:42px;height:42px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#e8000a;font-size:13px;flex-shrink:0}.cats{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;background:#fff;scrollbar-width:none}.cat{flex-shrink:0;padding:7px 14px;border-radius:20px;border:2px solid #e2e8f0;background:#fff;font-size:12px;font-weight:700;cursor:pointer;color:#64748b}.cat.active{background:#e8000a;border-color:#e8000a;color:#fff}.products{padding:10px 10px 90px}.product{background:#fff;border-radius:14px;padding:12px;margin-bottom:8px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}.prod-img{width:66px;height:66px;background:#fff5f5;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0}.prod-name{font-weight:700;font-size:14px;color:#1e293b}.prod-price{font-weight:800;font-size:14px;color:#e8000a;margin-top:2px}.prod-stock{font-size:11px;color:#94a3b8;margin-top:2px}.add-btn{background:#fff1f2;color:#e8000a;border:1.5px solid #fecdd3;border-radius:10px;padding:8px 10px;font-weight:700;cursor:pointer;font-size:12px;flex-shrink:0}.add-btn.added{background:#e8000a;color:#fff;border-color:#e8000a}.cart-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:406px;background:linear-gradient(135deg,#e8000a,#a80008);padding:14px 18px;display:flex;align-items:center;gap:10px;color:#fff;cursor:pointer;border-radius:16px 16px 0 0;z-index:50}.cart-bar.hidden{display:none}.badge{background:#fff;color:#e8000a;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}.page{display:none}.page.active{display:block}.cart-item{background:#fff;border-radius:14px;padding:11px 12px;margin-bottom:8px;display:flex;gap:10px;align-items:center}.cart-emoji{width:44px;height:44px;background:#fff5f5;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}.qty-btn{width:28px;height:28px;border-radius:8px;border:1.5px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:16px;font-weight:700}.order-btn{display:block;width:calc(100% - 24px);margin:10px 12px 90px;background:linear-gradient(135deg,#e8000a,#a80008);color:#fff;border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:800;cursor:pointer}</style></head><body>
-  <div id="catalog-page" class="page active"><div class="header"><div class="logo">XO🛒</div><div style="flex:1"><div style="font-size:17px;font-weight:800">XASANBOY OPTOM</div><div style="font-size:11px;opacity:.75">Tezkor sifatli yetkazib berish</div></div></div><div class="cats" id="cats"></div><div class="products" id="prods"></div></div><div id="cart-page" class="page"><div class="header"><button onclick="showPage('catalog')" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:18px">←</button><div style="flex:1;margin-left:10px"><div style="font-size:17px;font-weight:800">Savat</div><div id="cart-sub" style="font-size:11px;opacity:.75">0 ta</div></div><button onclick="clearCart()" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer">Tozalash</button></div><div style="padding:10px 10px 0" id="cart-list"></div><div id="cart-sum" style="background:#fff;border-radius:14px;padding:14px;margin:8px 10px;display:none"><div style="display:flex;justify-content:space-between;font-size:18px;font-weight:800"><span>Jami:</span><span id="total-txt" style="color:#e8000a"></span></div></div><button class="order-btn" onclick="placeOrder()">✅ BUYURTMA BERISH</button></div><div class="cart-bar hidden" id="cart-bar" onclick="showPage('cart')"><span>🛒</span><span class="badge" id="cart-cnt">0</span><span style="flex:1;font-weight:700;font-size:15px" id="cart-tot">Savatni korish</span><span style="font-size:18px">→</span></div>
-  <script>const tg=window.Telegram&&window.Telegram.WebApp;if(tg){tg.ready();tg.expand();}const P=[{id:1,name:"Un vishi",price:10000,stock:50,cat:"Highlights",e:"🌾"},{id:2,name:"Soya sous 500ml",price:10000,stock:30,cat:"Soya sous",e:"🫙"},{id:3,name:"Jets shaqalod",price:25000,stock:40,cat:"Shoqolad",e:"🍫"},{id:4,name:"Jazzi shaqalod",price:28000,stock:25
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>XASANBOY OPTOM</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+    body{background:#f5f5f5;max-width:430px;margin:0 auto}
+    .header{background:linear-gradient(135deg,#e8000a,#a80008);padding:14px 16px;color:#fff;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100}
+    .logo{width:42px;height:42px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#e8000a;font-size:13px;flex-shrink:0}
+    .cats{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;background:#fff;scrollbar-width:none}
+    .cat{flex-shrink:0;padding:7px 14px;border-radius:20px;border:2px solid #e2e8f0;background:#fff;font-size:12px;font-weight:700;cursor:pointer;color:#64748b}
+    .cat.active{background:#e8000a;border-color:#e8000a;color:#fff}
+    .products{padding:10px 10px 90px}
+    .product{background:#fff;border-radius:14px;padding:12px;margin-bottom:8px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .prod-img{width:66px;height:66px;background:#fff5f5;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0}
+    .prod-name{font-weight:700;font-size:14px;color:#1e293b}
+    .prod-price{font-weight:800;font-size:14px;color:#e8000a;margin-top:2px}
+    .prod-stock{font-size:11px;color:#94a3b8;margin-top:2px}
+    .add-btn{background:#fff1f2;color:#e8000a;border:1.5px solid #fecdd3;border-radius:10px;padding:8px 10px;font-weight:700;cursor:pointer;font-size:12px;flex-shrink:0}
+    .add-btn.added{background:#e8000a;color:#fff;border-color:#e8000a}
+    .cart-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:406px;background:linear-gradient(135deg,#e8000a,#a80008);padding:14px 18px;display:flex;align-items:center;gap:10px;color:#fff;cursor:pointer;border-radius:16px 16px 0 0;z-index:50}
+    .cart-bar.hidden{display:none}
+    .badge{background:#fff;color:#e8000a;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+    .page{display:none}
+    .page.active{display:block}
+    .cart-item{background:#fff;border-radius:14px;padding:11px 12px;margin-bottom:8px;display:flex;gap:10px;align-items:center}
+    .cart-emoji{width:44px;height:44px;background:#fff5f5;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+    .qty-btn{width:28px;height:28px;border-radius:8px;border:1.5px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:16px;font-weight:700}
+    .order-btn{display:block;width:calc(100% - 24px);margin:10px 12px 90px;background:linear-gradient(135deg,#e8000a,#a80008);color:#fff;border:none;border-radius:16px;padding:16px;font-size:16px;font-weight:800;cursor:pointer}
+    </style>
+  </head>
+  <body>
+
+    <div id="catalog-page" class="page active">
+        <div class="header">
+              <div class="logo">XO&#x1F6D2;</div>div>
+              <div style="flex:1">
+                      <div style="font-size:17px;font-weight:800">XASANBOY OPTOM</div>div>
+                      <div style="font-size:11px;opacity:.75">Tezkor sifatli yetkazib berish</div>div>
+              </div>div>
+        </div>div>
+        <div class="cats" id="cats"></div>div>
+        <div class="products" id="prods"></div>div>
+    </div>div>
+
+    <div id="cart-page" class="page">
+        <div class="header">
+              <button onclick="showPage('catalog')" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:18px">&#x2190;</button>button>
+              <div style="flex:1;margin-left:10px">
+                      <div style="font-size:17px;font-weight:800">Savat</div>div>
+                      <div id="cart-sub" style="font-size:11px;opacity:.75">0 ta</div>div>
+              </div>div>
+              <button onclick="clearCart()" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer">Tozalash</button>button>
+        </div>div>
+        <div style="padding:10px 10px 0" id="cart-list"></div>div>
+        <div id="cart-sum" style="background:#fff;border-radius:14px;padding:14px;margin:8px 10px;display:none">
+              <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:800">
+                      <span>Jami:</span>
+                    <span id="total-txt" style="color:#e8000a"></span>
+              </div>div>
+        </div>div>
+      <button class="order-btn" onclick="placeOrder()">&#x2705; BUYURTMA BERISH</button>button>
+    </div>div>
+  
+  <div class="cart-bar hidden" id="cart-bar" onclick="showPage('cart')">
+    <span>&#x1F6D2;</span>
+    <span class="badge" id="cart-cnt">0</span>
+    <span style="flex:1;font-weight:700;font-size:15px" id="cart-tot">Savatni ko'rish</span>
+    <span style="font-size:18px">&#x2192;</span>
+  </div>div>
+  
+  <script>
+    const tg = window.Telegram && window.Telegram.WebApp;
+    if (tg) { tg.ready(); tg.expand(); }
+
+    const P = [
+      {id:1, name:"Un vishi", price:10000, stock:50, cat:"Un", e:"&#x1F33E;"},
+      {id:2, name:"Soya sous 500ml", price:10000, stock:30, cat:"Soya sous", e:"&#x1FAD9;"},
+      {id:3, name:"Jets shokolad", price:25000, stock:40, cat:"Shokolad", e:"&#x1F36B;"},
+    {id:4, name:"Jazzi shokolad", price:28000, stock:25, cat:"Shokolad", e:"&#x1F36B;"},
+    {id:5, name:"Slivka qrem", price:35000, stock:10, cat:"Qrem", e:"&#x1F9C8;"},
+     {id:6, name:"Asal 7l", price:110000, stock:8, cat:"Asal", e:"&#x1F36F;"}
+      ];
+
+    let cart = {};
+    let activeCat = null;
+
+    function fmt(n) { return n.toLocaleString('uz-UZ') + " so'm"; }
+
+    function renderCats() {
+        const cats = [...new Set(P.map(p => p.cat))];
+        if (!activeCat) activeCat = cats[0];
+        const el = document.getElementById('cats');
+        el.innerHTML = cats.map(c =>
+          `<button class="cat${c===activeCat?' active':''}" onclick="setCat('${c}')">${c}</button>`
+         ).join('');
+        renderProds();
+    }
+
+      function setCat(c) { activeCat = c; renderCats(); }
+
+      function renderProds() {
+                                                                                         const items = P.filter(p => p.cat === activeCat);
+        document.getElementById('prods').innerHTML = items.map(p => `
+          <div class="product">
+          <div class="prod-img">${p.e}</div>
+            <div style="flex:1">
+              <div class="prod-name">${p.name}</div>
+                     <div class="prod-price">${fmt(p.price)}</div>
+                  <div class="prod-stock">Zaxira: ${p.stock} dona</div>
+  </div>
+          <button class="add-btn${cart[p.id]?' added':''}" onclick="addToCart(${p.id})">
+                                        ${cart[p.id] ? '&#x2705; '+cart[p.id]+' ta' : '+ Qo&#x02BC;sh'}
+       </button>
+           </div>
+                                 `).join('');
+     }
+
+     function addToCart(id) {
+          cart[id] = (cart[id] || 0) + 1;
+                                         renderProds();
+            updateCartBar();
+    }
+
+    function updateCartBar() {
+      const total = Object.keys(cart).reduce((s,id) => {
+            const p = P.find(x => x.id == id);
+        return s + (p ? p.price * cart[id] : 0);
+    }, 0);
+                                  const count = Object.values(cart).reduce((s,v) => s+v, 0);
+         const bar = document.getElementById('cart-bar');
+      if (count > 0) {
+          bar.classList.remove('hidden');
+                                               document.getElementById('cart-cnt').textContent = count;
+          document.getElementById('cart-tot').textContent = fmt(total);
+    } else {
+        bar.classList.add('hidden');
+    }
+    }
+
+     function showPage(p) {
+       document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+        document.getElementById(p+'-page').classList.add('active');
+            if (p === 'cart') renderCart();
+        }
+
+    function renderCart() {
+      const keys = Object.keys(cart).filter(id => cart[id] > 0);
+      if (keys.length === 0) {
+        document.getElementById('cart-list').innerHTML = '<p style="text-align:center;padding:30px;color:#94a3b8">Savat bo&#x02BC;sh</p>';
+        document.getElementById('cart-sum').style.display = 'none';
+        document.getElementById('cart-sub').textContent = '0 ta';
+                                                                                               return;
+    }
+      let total = 0;
+        let count = 0;
+        document.getElementById('cart-list').innerHTML = keys.map(id => {
+                                                 const p = P.find(x => x.id == id);
+                const sub = p.price * cart[id];
+        total += sub;
+         count += cart[id];
+        return `
+          <div class="cart-item">
+             <div class="cart-emoji">${p.e}</div>
+                                       <div style="flex:1">
+              <div style="font-weight:700;font-size:14px">${p.name}</div>
+              <div style="font-size:13px;color:#e8000a;font-weight:800">${fmt(sub)}</div>
+  </div>
+              <button class="qty-btn" onclick="changeQty(${id},-1)">-</button>
+            <span style="font-weight:700;min-width:20px;text-align:center">${cart[id]}</span>
+            <button class="qty-btn" onclick="changeQty(${id},1)">+</button>
+       </div>
+        `;
+    }).join('');
+         document.getElementById('total-txt').textContent = fmt(total);
+      document.getElementById('cart-sum').style.display = 'block';
+                                   document.getElementById('cart-sub').textContent = count + ' ta';
+      }
+
+      function changeQty(id, d) {
+      cart[id] = (cart[id] || 0) + d;
+      if (cart[id] <= 0) delete cart[id];
+         renderCart();
+                                         updateCartBar();
+      }
+
+     function clearCart() {
+      cart = {};
+         renderCart();
+      updateCartBar();
+       showPage('catalog');
+    }
+
+            function placeOrder() {
+        const keys = Object.keys(cart).filter(id => cart[id] > 0);
+        if (keys.length === 0) {
+         alert("Savat bo'sh! Avval mahsulot tanlang.");
+        return;
+      }
+        let total = 0;
+                                         const items = keys.map(id => {
+           const p = P.find(x => x.id == id);
+          const subtotal = p.price * cart[id];
+            total += subtotal;
+          return { id: p.id, name: p.name, qty: cart[id], price: p.price, subtotal: subtotal };
+      });
+
+      const orderData = JSON.stringify({ items: items, total: total });
+
+        if (tg && tg.sendData) {
+        // Telegram Mini App orqali ochilgan - botga ma'lumot yuborish
+           tg.sendData(orderData);
+    } else {
+         // Oddiy brauzerda ochilgan - alert ko'rsatish
+           alert("Buyurtma qabul qilindi!\nJami: " + fmt(total) + "\n\nTez orada bog'lanamiz.");
+        cart = {};
+        renderCart();
+         updateCartBar();
+         showPage('catalog');
+       }
+     }
+
+    renderCats();
+    updateCartBar();
+  </script>
+  </body>
+</html>html>
+  </script></span></span>
+  </body>
+  </style></title>
+  </head>
